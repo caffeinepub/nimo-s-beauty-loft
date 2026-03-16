@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'Parisienne';
+  src: url('/assets/fonts/Parisienne.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/fonts/PlayfairDisplay.woff2') format('woff2');
+  font-weight: 400 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Figtree';
+  src: url('/assets/fonts/Figtree.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0.97 0.010 55;
+  --foreground: 0.20 0.015 320;
+  --card: 1.00 0.000 0;
+  --card-foreground: 0.20 0.015 320;
+  --popover: 1.00 0.000 0;
+  --popover-foreground: 0.20 0.015 320;
+  --primary: 0.72 0.075 320;
+  --primary-foreground: 0.15 0.010 320;
+  --secondary: 0.93 0.025 55;
+  --secondary-foreground: 0.30 0.015 320;
+  --muted: 0.94 0.015 320;
+  --muted-foreground: 0.55 0.020 320;
+  --accent: 0.57 0.082 10;
+  --accent-foreground: 1.00 0.000 0;
+  --destructive: 0.55 0.200 25;
+  --destructive-foreground: 1.00 0.000 0;
+  --border: 0.88 0.022 320;
+  --input: 0.90 0.018 320;
+  --ring: 0.72 0.075 320;
+  --radius: 0.75rem;
+  --chart-1: 0.72 0.075 320;
+  --chart-2: 0.57 0.082 10;
+  --chart-3: 0.93 0.025 55;
+  --chart-4: 0.65 0.060 320;
+  --chart-5: 0.80 0.040 55;
+  --sidebar: 0.95 0.012 320;
+  --sidebar-foreground: 0.20 0.015 320;
+  --sidebar-primary: 0.72 0.075 320;
+  --sidebar-primary-foreground: 1.00 0.000 0;
+  --sidebar-accent: 0.90 0.025 320;
+  --sidebar-accent-foreground: 0.20 0.015 320;
+  --sidebar-border: 0.88 0.022 320;
+  --sidebar-ring: 0.72 0.075 320;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Figtree', sans-serif;
+  background-color: oklch(var(--background));
+  color: oklch(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-parisienne {
+  font-family: 'Parisienne', cursive;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.hero-bg {
+  background: radial-gradient(ellipse at 70% 50%, oklch(0.72 0.075 320 / 0.18) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, oklch(0.57 0.082 10 / 0.10) 0%, transparent 50%),
+              oklch(0.97 0.010 55);
+}
+
+.section-lilac {
+  background: linear-gradient(135deg, oklch(0.94 0.020 320) 0%, oklch(0.96 0.012 55) 100%);
+}
+
+.section-cream {
+  background: oklch(0.97 0.010 55);
+}
+
+.btn-accent {
+  background-color: oklch(var(--accent));
+  color: oklch(var(--accent-foreground));
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.btn-accent:hover {
+  background-color: oklch(0.52 0.085 10);
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  border: 1.5px solid oklch(var(--primary));
+  color: oklch(0.35 0.050 320);
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.btn-outline-primary:hover {
+  background-color: oklch(0.94 0.020 320);
+  transform: translateY(-1px);
+}
+
+.product-card {
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px oklch(0.72 0.075 320 / 0.18);
+}
+
+.floating-wa {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 9999px;
+  background-color: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+  transition: transform 0.2s;
+}
+
+.floating-wa:hover {
+  transform: scale(1.08);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
