@@ -3,7 +3,8 @@ import { Eye, Hand, Sparkles, Star } from "lucide-react";
 import { motion } from "motion/react";
 import { useServices } from "../hooks/useQueries";
 
-const WA_BOOK = `https://wa.me/254700000000?text=${encodeURIComponent("Hi Nimo's Beauty Loft, I'd like to book an appointment")}`;
+const WA_NUMBER = "2540112096201";
+const WA_BOOK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Nimo's Beauty Loft, I'd like to book an appointment")}`;
 
 const STATIC_SERVICES = [
   {
@@ -18,21 +19,21 @@ const STATIC_SERVICES = [
     description:
       "From subtle nude sets to bold nail art masterpieces — gel, acrylic, and press-ons available. Your nails, your canvas.",
     icon: Hand,
-    image: "/assets/generated/service-nails.dim_600x400.jpg",
+    image: "/assets/generated/nail-services.dim_800x600.jpg",
   },
   {
     name: "Eyebrow Shaping",
     description:
       "Expertly sculpted brows that frame your face and elevate your entire look. Threading, waxing, and tinting available.",
     icon: Eye,
-    image: null,
+    image: "/assets/generated/service-eyebrows.dim_600x400.jpg",
   },
   {
     name: "General Beauty",
     description:
       "Full-face glam, special occasion makeup, skin prep, and all-around pampering services to help you show up as your most radiant self.",
     icon: Star,
-    image: null,
+    image: "/assets/generated/general-beauty.dim_800x600.jpg",
   },
 ];
 

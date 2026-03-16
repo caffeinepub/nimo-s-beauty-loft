@@ -7,16 +7,18 @@ import {
   createRouter,
 } from "@tanstack/react-router";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import { CartProvider } from "./context/CartContext";
 import Admin from "./pages/Admin";
+import Checkout from "./pages/Checkout";
 import Home from "./pages/Home";
 
 const rootRoute = createRootRoute({
   component: () => (
-    <>
+    <CartProvider>
       <Outlet />
       <FloatingWhatsApp />
       <Toaster position="top-right" richColors />
-    </>
+    </CartProvider>
   ),
 });
 
@@ -26,13 +28,19 @@ const homeRoute = createRoute({
   component: Home,
 });
 
+const checkoutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/checkout",
+  component: Checkout,
+});
+
 const adminRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/admin",
   component: Admin,
 });
 
-const routeTree = rootRoute.addChildren([homeRoute, adminRoute]);
+const routeTree = rootRoute.addChildren([homeRoute, checkoutRoute, adminRoute]);
 
 const router = createRouter({ routeTree });
 

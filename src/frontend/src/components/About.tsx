@@ -5,7 +5,7 @@ const DEFAULT_ABOUT = `Nimo's Beauty Loft was born from a deep love of beauty, s
 
 We believe every woman deserves to look and feel her absolute best. Whether you're here for stunning lash extensions, intricate nail art, perfectly shaped brows, or to find your dream wig, we pour our heart into every service.
 
-At Nimo's, you're not just a client — you're family. Welcome to your beauty sanctuary.`;
+At Nimo's, you're not just a client — you're family. Welcome to your beauty sanctuary in Murang'a, Kenya.`;
 
 export default function About() {
   const { data: settings } = useSiteSettings();
@@ -53,10 +53,10 @@ export default function About() {
                   &ldquo;
                 </span>
                 <p className="font-playfair text-xl italic text-foreground leading-relaxed mt-6">
-                  Beauty is not in the face; beauty is a light in the heart.
+                  You ask, I deliver.
                 </p>
                 <p className="mt-4 text-sm text-muted-foreground font-medium">
-                  — The Nimo&apos;s Philosophy
+                  — The Nimo&apos;s Promise
                 </p>
               </div>
               <div

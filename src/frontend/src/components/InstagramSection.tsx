@@ -2,79 +2,130 @@ import { motion } from "motion/react";
 import { SiInstagram } from "react-icons/si";
 import { useSiteSettings } from "../hooks/useQueries";
 
-const PLACEHOLDER_COLORS = [
-  "oklch(0.85 0.045 320)",
-  "oklch(0.80 0.060 10)",
-  "oklch(0.88 0.030 55)",
-  "oklch(0.78 0.055 320)",
-  "oklch(0.83 0.040 10)",
-  "oklch(0.87 0.035 320)",
-];
+const IG_URL = "https://www.instagram.com/nimos_.loft?igsh=bm14cnYwczlrYjQ0";
+const HANDLE = "Nimos_.loft";
+const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Murang%27a%2C+Kenya";
+
+const DEFAULT_POSTS = 0n;
+const DEFAULT_FOLLOWERS = 0n;
+const DEFAULT_FOLLOWING = 0n;
 
 export default function InstagramSection() {
   const { data: settings } = useSiteSettings();
-  const handle = settings?.instagramHandle ?? "nimosbeautyloft";
-  const instaUrl = `https://instagram.com/${handle}`;
+
+  const posts = settings?.instagramPosts ?? DEFAULT_POSTS;
+  const followers = settings?.instagramFollowers ?? DEFAULT_FOLLOWERS;
+  const following = settings?.instagramFollowing ?? DEFAULT_FOLLOWING;
+
+  const formatCount = (n: bigint) => {
+    const num = Number(n);
+    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
+    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    return num.toString();
+  };
+
+  const stats = [
+    { label: "Posts", value: formatCount(posts) },
+    { label: "Followers", value: formatCount(followers) },
+    { label: "Following", value: formatCount(following) },
+  ];
 
   return (
-    <section className="section-cream py-20">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="instagram" className="py-24 section-cream">
+      <div className="max-w-2xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-10"
+          className="bg-white rounded-3xl p-6 sm:p-10 shadow-lilac relative overflow-hidden"
         >
-          <SiInstagram size={28} className="text-rosegold mx-auto mb-3" />
-          <h2 className="font-playfair text-3xl font-bold text-foreground">
-            Follow Along
-          </h2>
-          <p className="mt-2 text-muted-foreground">
-            Stay updated with our latest looks on Instagram{" "}
+          {/* IG gradient bar */}
+          <div
+            className="absolute top-0 left-0 right-0 h-1"
+            style={{
+              background: "linear-gradient(90deg, #833ab4, #fd1d1d, #fcb045)",
+            }}
+          />
+
+          <div className="flex flex-col items-center text-center gap-5">
+            {/* Profile picture */}
+            <div className="relative">
+              <div
+                className="w-28 h-28 rounded-full p-0.5"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)",
+                }}
+              >
+                <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
+                  <img
+                    src="/assets/uploads/file_0000000036b8722fb9194c8981db234a-1.png"
+                    alt="@Nimos_.loft"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
+              <div
+                className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center border-2 border-white"
+                style={{
+                  background: "linear-gradient(135deg, #833ab4, #fcb045)",
+                }}
+              >
+                <SiInstagram size={14} color="white" />
+              </div>
+            </div>
+
+            {/* Handle */}
+            <h3 className="font-playfair text-2xl font-bold text-foreground">
+              @{HANDLE}
+            </h3>
+
+            {/* Stats */}
+            <div className="flex gap-10">
+              {stats.map((s) => (
+                <div key={s.label} className="text-center">
+                  <p className="font-bold text-foreground text-lg">{s.value}</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Bio */}
+            <div className="text-sm text-foreground leading-relaxed space-y-1 max-w-sm">
+              <p className="font-semibold text-base">Nimo's Beauty Loft🌼</p>
+              <p>Lashes •Wigs •Nails •Brows •Beauty &amp; Body Care.</p>
+              <p>Making you glow with style &amp; confidence✨️</p>
+              <p>DM to Book / Shop🫧</p>
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary underline underline-offset-2 transition-colors inline-block"
+                data-ocid="instagram.map_marker"
+              >
+                📍 Murang'a, Kenya
+              </a>
+            </div>
+
+            {/* Follow button */}
             <a
-              href={instaUrl}
+              href={IG_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-rosegold hover:underline"
-              data-ocid="instagram.link"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-90 mt-1"
+              style={{
+                background:
+                  "linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)",
+              }}
+              data-ocid="instagram.primary_button"
             >
-              @{handle}
+              <SiInstagram size={15} /> Follow on Instagram
             </a>
-          </p>
+          </div>
         </motion.div>
-
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-          {PLACEHOLDER_COLORS.map((color) => (
-            <motion.a
-              key={color}
-              href={instaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.04 }}
-              className="aspect-square rounded-2xl flex items-center justify-center overflow-hidden"
-              style={{ background: color }}
-              data-ocid="instagram.link"
-              aria-label="View on Instagram"
-            >
-              <SiInstagram size={22} color="white" opacity={0.7} />
-            </motion.a>
-          ))}
-        </div>
-
-        <div className="text-center mt-8">
-          <a
-            href={instaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full border-2 border-rosegold text-rosegold font-semibold text-sm hover:bg-rosegold hover:text-white transition-colors"
-            data-ocid="instagram.primary_button"
-          >
-            <SiInstagram size={16} /> Follow @{handle}
-          </a>
-        </div>
       </div>
     </section>
   );

@@ -383,6 +383,9 @@ function SiteSettingsAdmin() {
     instagramHandle: "nimosbeautyloft",
     heroTagline: "Where Beauty Meets Luxury",
     aboutText: "",
+    instagramPosts: "0",
+    instagramFollowers: "0",
+    instagramFollowing: "0",
   });
   const [initialized, setInitialized] = useState(false);
 
@@ -393,12 +396,20 @@ function SiteSettingsAdmin() {
       instagramHandle: settings.instagramHandle,
       heroTagline: settings.heroTagline,
       aboutText: settings.aboutText,
+      instagramPosts: settings.instagramPosts?.toString() ?? "0",
+      instagramFollowers: settings.instagramFollowers?.toString() ?? "0",
+      instagramFollowing: settings.instagramFollowing?.toString() ?? "0",
     });
   }
 
   const handleSave = async () => {
     try {
-      await updateMutation.mutateAsync(form);
+      await updateMutation.mutateAsync({
+        ...form,
+        instagramPosts: BigInt(Number(form.instagramPosts) || 0),
+        instagramFollowers: BigInt(Number(form.instagramFollowers) || 0),
+        instagramFollowing: BigInt(Number(form.instagramFollowing) || 0),
+      });
       toast.success("Settings saved!");
     } catch {
       toast.error("Failed to save settings.");
@@ -432,6 +443,47 @@ function SiteSettingsAdmin() {
             placeholder="nimosbeautyloft"
             data-ocid="admin.settings.input"
           />
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          <div className="space-y-1.5">
+            <Label>Posts</Label>
+            <Input
+              type="number"
+              min="0"
+              value={form.instagramPosts}
+              onChange={(e) =>
+                setForm((p) => ({ ...p, instagramPosts: e.target.value }))
+              }
+              placeholder="0"
+              data-ocid="admin.settings.input"
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label>Followers</Label>
+            <Input
+              type="number"
+              min="0"
+              value={form.instagramFollowers}
+              onChange={(e) =>
+                setForm((p) => ({ ...p, instagramFollowers: e.target.value }))
+              }
+              placeholder="0"
+              data-ocid="admin.settings.input"
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label>Following</Label>
+            <Input
+              type="number"
+              min="0"
+              value={form.instagramFollowing}
+              onChange={(e) =>
+                setForm((p) => ({ ...p, instagramFollowing: e.target.value }))
+              }
+              placeholder="0"
+              data-ocid="admin.settings.input"
+            />
+          </div>
         </div>
         <div className="space-y-1.5">
           <Label>Hero Tagline</Label>

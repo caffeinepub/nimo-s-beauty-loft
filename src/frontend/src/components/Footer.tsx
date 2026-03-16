@@ -1,6 +1,10 @@
 import { SiInstagram, SiWhatsapp } from "react-icons/si";
 import { useSiteSettings } from "../hooks/useQueries";
 
+const WA_NUMBER = "2540112096201";
+const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Murang%27a%2C+Kenya";
+
 const NAV = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
@@ -12,9 +16,6 @@ const NAV = [
 
 export default function Footer() {
   const { data: settings } = useSiteSettings();
-  const waNumber = (settings?.whatsappNumber ?? "+254700000000")
-    .replace("+", "")
-    .replace(/\s/g, "");
   const igHandle = settings?.instagramHandle ?? "nimosbeautyloft";
   const year = new Date().getFullYear();
   const hostname =
@@ -38,8 +39,20 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-white/60 leading-relaxed">
-              Where beauty meets luxury. Your premiere beauty destination in
-              Nairobi.
+              Your premier beauty destination in{" "}
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-white transition-colors"
+                data-ocid="footer.map_marker"
+              >
+                Murang'a, Kenya
+              </a>
+              .
+            </p>
+            <p className="mt-2 text-sm italic text-white/40">
+              You ask, I deliver.
             </p>
           </div>
 
@@ -70,7 +83,7 @@ export default function Footer() {
             </h4>
             <div className="flex gap-4">
               <a
-                href={`https://wa.me/${waNumber}`}
+                href={`https://wa.me/${WA_NUMBER}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
@@ -91,7 +104,15 @@ export default function Footer() {
                 <SiInstagram size={17} color="white" />
               </a>
             </div>
-            <p className="mt-5 text-xs text-white/40">Nairobi, Kenya</p>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 text-xs text-white/40 hover:text-white/70 underline underline-offset-2 transition-colors inline-block"
+              data-ocid="footer.map_marker"
+            >
+              📍 Murang'a, Kenya
+            </a>
           </div>
         </div>
 

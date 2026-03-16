@@ -1,85 +1,168 @@
 import { Button } from "@/components/ui/button";
+import { MapPin } from "lucide-react";
 import { motion } from "motion/react";
-import { useSiteSettings } from "../hooks/useQueries";
 
-const WA_BOOK = `https://wa.me/254700000000?text=${encodeURIComponent("Hi Nimo's Beauty Loft, I'd like to book an appointment")}`;
+const WOMEN = [
+  {
+    src: "/assets/generated/hero-woman-1.dim_600x800.jpg",
+    alt: "African beauty",
+  },
+  {
+    src: "/assets/generated/hero-woman-2.dim_600x800.jpg",
+    alt: "Radiant beauty",
+  },
+  {
+    src: "/assets/generated/hero-woman-3.dim_600x800.jpg",
+    alt: "Elegant beauty",
+  },
+];
 
 export default function Hero() {
-  const { data: settings } = useSiteSettings();
-  const tagline = settings?.heroTagline ?? "Where Beauty Meets Luxury";
-
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden hero-bg"
+      className="relative min-h-screen overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(160deg, oklch(0.14 0.012 320) 0%, oklch(0.18 0.015 10) 100%)",
+      }}
     >
-      {/* Decorative blobs */}
-      <div
-        className="absolute top-20 right-0 w-[55%] h-full rounded-l-[3rem] overflow-hidden"
-        aria-hidden="true"
-      >
-        <img
-          src="/assets/generated/hero-beauty.dim_1200x700.jpg"
-          alt=""
-          className="w-full h-full object-cover"
-          loading="eager"
+      {/* Three women — large, prominent, visible */}
+      <div className="absolute inset-0 flex">
+        {WOMEN.map((w, i) => (
+          <motion.div
+            key={w.alt}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.0, delay: i * 0.15, ease: "easeOut" }}
+            className="relative flex-1 h-full"
+          >
+            <img
+              src={w.src}
+              alt={w.alt}
+              className="w-full h-full object-cover object-top"
+              loading="eager"
+              style={{ opacity: i === 1 ? 1 : 0.85 }}
+            />
+            {/* Edge fade between panels */}
+            {i < 2 && (
+              <div
+                className="absolute top-0 right-0 w-10 h-full"
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, oklch(0.16 0.013 320 / 0.6))",
+                }}
+              />
+            )}
+          </motion.div>
+        ))}
+        {/* Dark vignette overlay so text is readable */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, oklch(0.12 0.010 320 / 0.85) 0%, oklch(0.12 0.010 320 / 0.45) 35%, transparent 65%), " +
+              "linear-gradient(to top, oklch(0.12 0.010 320 / 0.7) 0%, transparent 40%)",
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-cream-light/80 via-cream-light/20 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-32">
+      {/* Hero content */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center max-w-6xl mx-auto px-6 py-32">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-lg"
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          className="max-w-xl"
         >
-          <span className="inline-block text-sm font-semibold tracking-[0.2em] uppercase text-rosegold mb-4">
-            ✦ Nairobi's Premier Beauty Loft
-          </span>
-          <h1 className="font-playfair text-5xl sm:text-6xl font-bold leading-tight text-foreground mb-6">
-            {tagline}
+          <motion.span
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-[0.25em] uppercase mb-6 px-3 py-1.5 rounded-full border"
+            style={{
+              color: "oklch(0.80 0.060 10)",
+              borderColor: "oklch(0.80 0.060 10 / 0.4)",
+            }}
+          >
+            <MapPin size={11} /> Murang'a, Kenya
+          </motion.span>
+
+          <h1
+            className="font-parisienne text-7xl sm:text-8xl leading-tight mb-3"
+            style={{ color: "oklch(0.97 0.008 55)" }}
+          >
+            Nimo's
           </h1>
-          <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-            Lash extensions, nail artistry, and luxury beauty services tailored
-            to make you feel effortlessly radiant.
+          <h2
+            className="font-playfair text-3xl sm:text-4xl font-bold tracking-wide mb-4"
+            style={{ color: "oklch(0.97 0.008 55)" }}
+          >
+            Beauty Loft
+          </h2>
+          <p
+            className="font-playfair text-xl italic mb-3"
+            style={{ color: "oklch(0.80 0.060 10)" }}
+          >
+            You ask, I deliver.
           </p>
+          <p
+            className="text-base leading-relaxed mb-10"
+            style={{ color: "oklch(0.80 0.015 320)" }}
+          >
+            Luxury beauty services — wigs, jewellery, eyebrow shaping, and more
+            — crafted for every woman in Murang'a.
+          </p>
+
           <div className="flex flex-wrap gap-4">
             <motion.a
-              href={WA_BOOK}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#products"
               whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.97 }}
               data-ocid="hero.primary_button"
             >
               <Button
                 size="lg"
-                className="btn-accent rounded-full px-8 text-base shadow-rosegold"
+                className="rounded-full px-8 text-base font-semibold"
+                style={{
+                  backgroundColor: "oklch(0.57 0.082 10)",
+                  color: "white",
+                }}
               >
-                Book Appointment
+                Explore Our World ✨
               </Button>
             </motion.a>
             <motion.a
-              href="#products"
+              href="#services"
               whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.97 }}
               data-ocid="hero.secondary_button"
             >
               <Button
                 size="lg"
                 variant="outline"
-                className="btn-outline-primary rounded-full px-8 text-base"
+                className="rounded-full px-8 text-base"
+                style={{
+                  borderColor: "oklch(0.97 0.008 55 / 0.5)",
+                  color: "oklch(0.97 0.008 55)",
+                  background: "transparent",
+                }}
               >
-                Shop Wigs ✨
+                Our Services
               </Button>
             </motion.a>
           </div>
         </motion.div>
       </div>
 
-      {/* Bottom wave */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
+      {/* Bottom fade */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24"
+        style={{
+          background:
+            "linear-gradient(to top, oklch(var(--background)), transparent)",
+        }}
+      />
     </section>
   );
 }

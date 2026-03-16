@@ -2,31 +2,53 @@ import { motion } from "motion/react";
 import { useGalleryImages } from "../hooks/useQueries";
 
 const STATIC_GALLERY = [
-  { url: "/assets/generated/gallery-1.dim_600x800.jpg", caption: "Glam look" },
-  { url: "/assets/generated/gallery-2.dim_600x800.jpg", caption: "Nail art" },
+  {
+    url: "/assets/generated/gallery-lashes-closeup.dim_600x800.jpg",
+    caption: "Lash extensions",
+  },
+  {
+    url: "/assets/generated/gallery-nails-art.dim_600x800.jpg",
+    caption: "Nail art",
+  },
+  {
+    url: "/assets/generated/gallery-eyebrows.dim_600x800.jpg",
+    caption: "Brow shaping",
+  },
+  {
+    url: "/assets/generated/gallery-glam-makeup.dim_600x800.jpg",
+    caption: "Full glam",
+  },
+  {
+    url: "/assets/generated/gallery-wig-straight.dim_600x800.jpg",
+    caption: "Silky straight wig",
+  },
+  {
+    url: "/assets/generated/gallery-headband-wig.dim_600x800.jpg",
+    caption: "Headband wig",
+  },
+  {
+    url: "/assets/generated/gallery-jewellery-set.dim_600x800.jpg",
+    caption: "Rose gold jewellery",
+  },
+  {
+    url: "/assets/generated/gallery-nails-french.dim_600x800.jpg",
+    caption: "French tips",
+  },
   {
     url: "/assets/generated/wig-glueless-1.dim_600x600.jpg",
-    caption: "Silky straight",
+    caption: "Glueless wig",
+  },
+  {
+    url: "/assets/generated/jewellery-1.dim_600x600.jpg",
+    caption: "Jewellery set",
   },
   {
     url: "/assets/generated/service-lashes.dim_600x400.jpg",
     caption: "Lash set",
   },
   {
-    url: "/assets/generated/wig-glueless-2.dim_600x600.jpg",
-    caption: "Honey curls",
-  },
-  {
-    url: "/assets/generated/service-nails.dim_600x400.jpg",
-    caption: "Nail art",
-  },
-  {
-    url: "/assets/generated/wig-headband-1.dim_600x600.jpg",
-    caption: "Headband wig",
-  },
-  {
-    url: "/assets/generated/jewellery-1.dim_600x600.jpg",
-    caption: "Rose gold set",
+    url: "/assets/generated/service-eyebrows.dim_600x400.jpg",
+    caption: "Eyebrow shaping",
   },
 ];
 

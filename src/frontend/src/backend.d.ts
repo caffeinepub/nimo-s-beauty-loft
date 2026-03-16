@@ -28,6 +28,9 @@ export interface Service {
 }
 export interface SiteSettings {
     instagramHandle: string;
+    instagramPosts: bigint;
+    instagramFollowers: bigint;
+    instagramFollowing: bigint;
     whatsappNumber: string;
     aboutText: string;
     heroTagline: string;
@@ -84,6 +87,6 @@ export interface backendInterface {
     updateGalleryImage(id: GalleryImageId, imageUrl: string, caption: string, displayOrder: bigint): Promise<void>;
     updateProduct(id: ProductId, name: string, description: string, priceKES: bigint, category: Category, imageUrl: string, isAvailable: boolean): Promise<void>;
     updateService(id: ServiceId, name: string, description: string, priceFrom: string | null, iconName: string, displayOrder: bigint): Promise<void>;
-    updateSiteSettings(whatsappNumber: string, instagramHandle: string, heroTagline: string, aboutText: string): Promise<void>;
+    updateSiteSettings(whatsappNumber: string, instagramHandle: string, heroTagline: string, aboutText: string, instagramPosts: bigint, instagramFollowers: bigint, instagramFollowing: bigint): Promise<void>;
     updateTestimonial(id: TestimonialId, clientName: string, review: string, rating: bigint, avatarInitials: string): Promise<void>;
 }

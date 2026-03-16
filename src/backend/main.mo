@@ -80,9 +80,20 @@ actor {
     avatarInitials : Text;
   };
 
+  // Legacy type - same shape as originally deployed; used for stable upgrade migration
+  type SiteSettingsLegacy = {
+    whatsappNumber : Text;
+    instagramHandle : Text;
+    heroTagline : Text;
+    aboutText : Text;
+  };
+
   public type SiteSettings = {
     whatsappNumber : Text;
     instagramHandle : Text;
+    instagramPosts : Nat;
+    instagramFollowers : Nat;
+    instagramFollowing : Nat;
     heroTagline : Text;
     aboutText : Text;
   };
@@ -102,7 +113,10 @@ actor {
   let testimonials = Map.empty<TestimonialId, Testimonial>();
   let userProfiles = Map.empty<Principal, UserProfile>();
 
-  var siteSettings : ?SiteSettings = null;
+  // Keep old stable variable name/type so Motoko can load existing data on upgrade
+  var siteSettings : ?SiteSettingsLegacy = null;
+  // New variable for extended SiteSettings
+  var siteSettingsV2 : ?SiteSettings = null;
 
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
@@ -330,18 +344,21 @@ actor {
   };
 
   // Site Settings Functions
-  public shared ({ caller }) func updateSiteSettings(whatsappNumber : Text, instagramHandle : Text, heroTagline : Text, aboutText : Text) : async () {
+  public shared ({ caller }) func updateSiteSettings(whatsappNumber : Text, instagramHandle : Text, heroTagline : Text, aboutText : Text, instagramPosts : Nat, instagramFollowers : Nat, instagramFollowing : Nat) : async () {
     assertAccessControlAdmin(caller);
-    siteSettings := ?{
+    siteSettingsV2 := ?{
       whatsappNumber;
       instagramHandle;
+      instagramPosts;
+      instagramFollowers;
+      instagramFollowing;
       heroTagline;
       aboutText;
     };
   };
 
   public query ({ caller }) func getSiteSettings() : async ?SiteSettings {
-    siteSettings;
+    siteSettingsV2;
   };
 
   // Helper Functions
@@ -350,4 +367,25 @@ actor {
       Runtime.trap("NotPermitted: Caller must have admin privileges. Access denied for principal " # caller.toText());
     };
   };
+  system func postupgrade() {
+    // Migrate legacy siteSettings to siteSettingsV2 (adds instagram stats defaulting to 0)
+    switch (siteSettings) {
+      case (?legacy) {
+        if (siteSettingsV2 == null) {
+          siteSettingsV2 := ?{
+            whatsappNumber = legacy.whatsappNumber;
+            instagramHandle = legacy.instagramHandle;
+            instagramPosts = 0;
+            instagramFollowers = 0;
+            instagramFollowing = 0;
+            heroTagline = legacy.heroTagline;
+            aboutText = legacy.aboutText;
+          };
+        };
+        siteSettings := null;
+      };
+      case null {};
+    };
+  };
+
 };

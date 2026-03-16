@@ -59,6 +59,9 @@ export const Service = IDL.Record({
 });
 export const SiteSettings = IDL.Record({
   'instagramHandle' : IDL.Text,
+  'instagramPosts' : IDL.Nat,
+  'instagramFollowers' : IDL.Nat,
+  'instagramFollowing' : IDL.Nat,
   'whatsappNumber' : IDL.Text,
   'aboutText' : IDL.Text,
   'heroTagline' : IDL.Text,
@@ -155,7 +158,7 @@ export const idlService = IDL.Service({
       [],
     ),
   'updateSiteSettings' : IDL.Func(
-      [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Nat, IDL.Nat, IDL.Nat],
       [],
       [],
     ),
@@ -220,6 +223,9 @@ export const idlFactory = ({ IDL }) => {
   });
   const SiteSettings = IDL.Record({
     'instagramHandle' : IDL.Text,
+    'instagramPosts' : IDL.Nat,
+    'instagramFollowers' : IDL.Nat,
+    'instagramFollowing' : IDL.Nat,
     'whatsappNumber' : IDL.Text,
     'aboutText' : IDL.Text,
     'heroTagline' : IDL.Text,
@@ -320,7 +326,7 @@ export const idlFactory = ({ IDL }) => {
         [],
       ),
     'updateSiteSettings' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Nat, IDL.Nat, IDL.Nat],
         [],
         [],
       ),

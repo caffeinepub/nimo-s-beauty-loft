@@ -117,6 +117,9 @@ export interface _CaffeineStorageCreateCertificateResult {
 }
 export interface SiteSettings {
     instagramHandle: string;
+    instagramPosts: bigint;
+    instagramFollowers: bigint;
+    instagramFollowing: bigint;
     whatsappNumber: string;
     aboutText: string;
     heroTagline: string;
@@ -184,7 +187,7 @@ export interface backendInterface {
     updateGalleryImage(id: GalleryImageId, imageUrl: string, caption: string, displayOrder: bigint): Promise<void>;
     updateProduct(id: ProductId, name: string, description: string, priceKES: bigint, category: Category, imageUrl: string, isAvailable: boolean): Promise<void>;
     updateService(id: ServiceId, name: string, description: string, priceFrom: string | null, iconName: string, displayOrder: bigint): Promise<void>;
-    updateSiteSettings(whatsappNumber: string, instagramHandle: string, heroTagline: string, aboutText: string): Promise<void>;
+    updateSiteSettings(whatsappNumber: string, instagramHandle: string, heroTagline: string, aboutText: string, instagramPosts: bigint, instagramFollowers: bigint, instagramFollowing: bigint): Promise<void>;
     updateTestimonial(id: TestimonialId, clientName: string, review: string, rating: bigint, avatarInitials: string): Promise<void>;
 }
 import type { Category as _Category, Product as _Product, ProductId as _ProductId, Service as _Service, ServiceId as _ServiceId, SiteSettings as _SiteSettings, UserProfile as _UserProfile, UserRole as _UserRole, _CaffeineStorageRefillInformation as __CaffeineStorageRefillInformation, _CaffeineStorageRefillResult as __CaffeineStorageRefillResult } from "./declarations/backend.did.d.ts";
@@ -610,17 +613,17 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async updateSiteSettings(arg0: string, arg1: string, arg2: string, arg3: string): Promise<void> {
+    async updateSiteSettings(arg0: string, arg1: string, arg2: string, arg3: string, arg4: bigint, arg5: bigint, arg6: bigint): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.updateSiteSettings(arg0, arg1, arg2, arg3);
+                const result = await this.actor.updateSiteSettings(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.updateSiteSettings(arg0, arg1, arg2, arg3);
+            const result = await this.actor.updateSiteSettings(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
             return result;
         }
     }

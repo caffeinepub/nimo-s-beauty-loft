@@ -41,6 +41,9 @@ export interface Service {
 export type ServiceId = bigint;
 export interface SiteSettings {
   'instagramHandle' : string,
+  'instagramPosts' : bigint,
+  'instagramFollowers' : bigint,
+  'instagramFollowing' : bigint,
   'whatsappNumber' : string,
   'aboutText' : string,
   'heroTagline' : string,
@@ -127,7 +130,7 @@ export interface _SERVICE {
     undefined
   >,
   'updateSiteSettings' : ActorMethod<
-    [string, string, string, string],
+    [string, string, string, string, bigint, bigint, bigint],
     undefined
   >,
   'updateTestimonial' : ActorMethod<

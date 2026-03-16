@@ -1,6 +1,6 @@
 import { SiWhatsapp } from "react-icons/si";
 
-const WA_NUMBER = "254700000000";
+const WA_NUMBER = "2540112096201";
 const WA_URL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Nimo's Beauty Loft, I'd like to book an appointment")}`;
 
 export default function FloatingWhatsApp() {

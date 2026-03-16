@@ -9,14 +9,14 @@ import { SiInstagram, SiWhatsapp } from "react-icons/si";
 import { toast } from "sonner";
 import { useSiteSettings } from "../hooks/useQueries";
 
+const WA_NUMBER = "2540112096201";
+const EMAIL = "maryannewairimu68@gmail.com";
+
 export default function Contact() {
   const { data: settings } = useSiteSettings();
-  const waNumber = (settings?.whatsappNumber ?? "+254700000000")
-    .replace("+", "")
-    .replace(/\s/g, "");
   const igHandle = settings?.instagramHandle ?? "nimosbeautyloft";
 
-  const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent("Hi Nimo's Beauty Loft, I'd like to get in touch")}`;
+  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Nimo's Beauty Loft, I'd like to get in touch")}`;
   const igUrl = `https://instagram.com/${igHandle}`;
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -77,7 +77,7 @@ export default function Contact() {
                 <p className="font-semibold text-foreground group-hover:text-rosegold transition-colors">
                   Chat on WhatsApp
                 </p>
-                <p className="text-sm text-muted-foreground">+{waNumber}</p>
+                <p className="text-sm text-muted-foreground">+254 0112096201</p>
               </div>
             </a>
 
@@ -99,17 +99,21 @@ export default function Contact() {
               </div>
             </a>
 
-            <div className="flex items-center gap-4 bg-white rounded-2xl p-5 shadow-xs">
+            <a
+              href={`mailto:${EMAIL}`}
+              className="flex items-center gap-4 bg-white rounded-2xl p-5 shadow-xs hover:shadow-lilac transition-shadow group"
+              data-ocid="contact.link"
+            >
               <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 bg-lilac-light">
                 <Mail size={22} className="text-primary" />
               </div>
               <div>
-                <p className="font-semibold text-foreground">Email</p>
-                <p className="text-sm text-muted-foreground">
-                  hello@nimosbeautyloft.com
+                <p className="font-semibold text-foreground group-hover:text-rosegold transition-colors">
+                  Email
                 </p>
+                <p className="text-sm text-muted-foreground">{EMAIL}</p>
               </div>
-            </div>
+            </a>
           </motion.div>
 
           {/* Right: form */}

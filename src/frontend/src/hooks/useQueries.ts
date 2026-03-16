@@ -282,12 +282,18 @@ export function useUpdateSiteSettings() {
       instagramHandle: string;
       heroTagline: string;
       aboutText: string;
+      instagramPosts: bigint;
+      instagramFollowers: bigint;
+      instagramFollowing: bigint;
     }) =>
       actor!.updateSiteSettings(
         s.whatsappNumber,
         s.instagramHandle,
         s.heroTagline,
         s.aboutText,
+        s.instagramPosts,
+        s.instagramFollowers,
+        s.instagramFollowing,
       ),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["siteSettings"] }),
   });
