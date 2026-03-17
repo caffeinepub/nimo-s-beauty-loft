@@ -1,3 +1,4 @@
+import BookingFAQ from "../components/BookingFAQ";
 import CartDrawer from "../components/CartDrawer";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
@@ -22,6 +23,7 @@ export default function Home() {
         <Products />
         <Gallery />
         <Testimonials />
+        <BookingFAQ />
         <InstagramSection />
         <Contact />
       </main>
