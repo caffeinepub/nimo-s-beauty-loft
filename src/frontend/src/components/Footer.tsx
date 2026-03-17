@@ -18,8 +18,6 @@ export default function Footer() {
   const { data: settings } = useSiteSettings();
   const igHandle = settings?.instagramHandle ?? "nimosbeautyloft";
   const year = new Date().getFullYear();
-  const hostname =
-    typeof window !== "undefined" ? window.location.hostname : "";
 
   return (
     <footer className="bg-foreground text-white py-14">
@@ -116,16 +114,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
+        <div className="pt-6 text-xs text-white/40">
           <p>© {year} Nimo's Beauty Loft. All rights reserved.</p>
-          <a
-            href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(hostname)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white/70 transition-colors"
-          >
-            Built with ❤ using caffeine.ai
-          </a>
         </div>
       </div>
     </footer>
